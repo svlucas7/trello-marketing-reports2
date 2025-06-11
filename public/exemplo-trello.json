@@ -1,0 +1,109 @@
+{
+  "name": "Quadro Marketing - Exemplo",
+  "cards": [
+    {
+      "id": "card1",
+      "name": "Campanha de Social Media Q2",
+      "desc": "Desenvolver estratégia de conteúdo para redes sociais do segundo trimestre",
+      "due": "2025-06-15T10:00:00.000Z",
+      "dateLastActivity": "2025-06-10T14:30:00.000Z",
+      "idList": "list_content",
+      "idMembers": ["member1"],
+      "closed": false
+    },
+    {
+      "id": "card2", 
+      "name": "Relatório de Performance Maio",
+      "desc": "Análise completa dos resultados de marketing do mês de maio",
+      "due": "2025-06-05T17:00:00.000Z",
+      "dateLastActivity": "2025-06-11T09:15:00.000Z",
+      "idList": "list_done",
+      "idMembers": ["member2"],
+      "closed": false
+    },
+    {
+      "id": "card3",
+      "name": "Criação de Landing Page",
+      "desc": "Nova landing page para produto X",
+      "due": "2025-06-08T12:00:00.000Z",
+      "dateLastActivity": "2025-06-11T11:45:00.000Z",
+      "idList": "list_quality",
+      "idMembers": ["member1"],
+      "closed": false
+    },
+    {
+      "id": "card4",
+      "name": "Newsletter Semanal",
+      "desc": "Preparação e envio da newsletter semanal",
+      "due": null,
+      "dateLastActivity": "2025-06-11T08:00:00.000Z",
+      "idList": "list_blocked",
+      "idMembers": [],
+      "closed": false
+    }
+  ],
+  "lists": [
+    {
+      "id": "list_planning",
+      "name": "PLANEJANDO ESTRATÉGIAS",
+      "closed": false
+    },
+    {
+      "id": "list_recurring", 
+      "name": "ATIVIDADES RECORRENTES",
+      "closed": false
+    },
+    {
+      "id": "list_content",
+      "name": "EM PROCESSO DE CONTEÚDO", 
+      "closed": false
+    },
+    {
+      "id": "list_quality",
+      "name": "EM PROCESSO DE QUALIDADE",
+      "closed": false
+    },
+    {
+      "id": "list_editing",
+      "name": "EM PROCESSO DE EDIÇÃO E REVISÃO",
+      "closed": false
+    },
+    {
+      "id": "list_assembly",
+      "name": "EM PROCESSO DE MONTAGEM",
+      "closed": false
+    },
+    {
+      "id": "list_review",
+      "name": "EM PROCESSO DE REVISÃO", 
+      "closed": false
+    },
+    {
+      "id": "list_blocked",
+      "name": "AGUARDANDO RETORNO DE CORREÇÕES",
+      "closed": false
+    },
+    {
+      "id": "list_sending",
+      "name": "EM PROCESSO DE ENVIO",
+      "closed": false
+    },
+    {
+      "id": "list_done",
+      "name": "FEITO",
+      "closed": false
+    }
+  ],
+  "members": [
+    {
+      "id": "member1",
+      "fullName": "Ana Silva",
+      "username": "anasilva"
+    },
+    {
+      "id": "member2", 
+      "fullName": "Carlos Santos",
+      "username": "carlossantos"
+    }
+  ]
+}
