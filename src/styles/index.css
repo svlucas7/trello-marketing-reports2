@@ -1,3 +1,158 @@
+/* Bootstrap Integration */
+/* Manter variáveis CSS customizadas e integrar com Bootstrap */
+:root {
+  --primary-color: #1e40af;
+  --primary-dark: #1e3a8a;
+  --success-color: #16a34a;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #4b5563;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --white: #ffffff;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Bootstrap custom theme colors */
+  --bs-primary: var(--primary-color);
+  --bs-success: var(--success-color);
+  --bs-warning: var(--warning-color);
+  --bs-danger: var(--danger-color);
+}
+
+/* Estilos customizados que trabalham com Bootstrap */
+.bg-primary-color {
+  background-color: var(--primary-color) !important;
+}
+
+.text-primary-color {
+  color: var(--primary-color) !important;
+}
+
+.text-success {
+  color: var(--success-color) !important;
+}
+
+.text-warning {
+  color: var(--warning-color) !important;
+}
+
+.text-danger {
+  color: var(--danger-color) !important;
+}
+
+/* Animações customizadas */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Utility classes */
+.max-height-300 {
+  max-height: 300px;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-pop-in {
+  animation: pop-in 0.5s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Status badges customizados */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-completed {
+  background-color: #dcfce7;
+  color: var(--success-color);
+}
+
+.status-in-progress {
+  background-color: #dbeafe;
+  color: var(--primary-color);
+}
+
+.status-late {
+  background-color: #fee2e2;
+  color: var(--danger-color);
+}
+
+.status-blocked {
+  background-color: #fef3c7;
+  color: var(--warning-color);
+}
+
+/* Botões customizados que complementam Bootstrap */
+.btn-primary-custom {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Cards customizados */
+.card-modern {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.card-modern:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Spinner customizado */
+.spinner-custom {
+  border: 4px solid var(--gray-200);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Reset e variáveis CSS */
 :root {
   --primary-color: #1e40af;

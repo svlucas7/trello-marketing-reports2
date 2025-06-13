@@ -8,5 +8,19 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          charts: ['chart.js', 'react-chartjs-2'],
+          utils: ['date-fns', 'xlsx', 'jspdf', 'html2canvas']
+        }
+      }
+    }
+  },
+  server: {
+    port: 3000,
+    host: true
   }
 })

@@ -47,6 +47,18 @@ export interface ReportSummary {
   blockedTasks: number;
 }
 
+export interface CollaboratorReport {
+  collaboratorName: string;
+  totalTasks: number;
+  completedTasks: number;
+  inProgressTasks: number;
+  lateTasks: number;
+  blockedTasks: number;
+  completionRate: number;
+  averageDaysLate: number;
+  tasks: TaskReport[];
+}
+
 export type TaskStatus = 
   | 'Concluída' 
   | 'Em Andamento' 

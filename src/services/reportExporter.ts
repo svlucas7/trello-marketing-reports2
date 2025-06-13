@@ -144,7 +144,8 @@ export class ReportExporter {
     text += `Tarefas em Andamento: ${summary.inProgressTasks}\n`;
     text += `Tarefas Atrasadas: ${summary.lateTasks}\n\n`;
     
-    text += 'RELATÓRIO INDIVIDUAL POR TAREFA:\n\n';
+    text += 'RELATÓRIO DETALHADO:\n';
+    text += '--------------------\n\n';
     
     taskReports.forEach((task, index) => {
       text += `${index + 1}. Nome da Tarefa: ${task.taskName}\n`;
@@ -174,28 +175,77 @@ export class ReportExporter {
     URL.revokeObjectURL(url);
   }
 
-  // Exportar para JSON
-  static exportToJSON(
-    summary: ReportSummary,
-    taskReports: TaskReport[],
+  // Método para exportar JSON
+  static exportJSON(
+    data: { summary: ReportSummary; taskReports: TaskReport[]; collaboratorReports: any[] },
     dateRange: DateRange
   ): void {
-    const data = {
-      periodo: {
-        inicio: format(dateRange.startDate, 'dd/MM/yyyy'),
-        fim: format(dateRange.endDate, 'dd/MM/yyyy')
+    const exportData = {
+      ...data,
+      dateRange: {
+        startDate: dateRange.startDate.toISOString(),
+        endDate: dateRange.endDate.toISOString()
       },
-      resumo: summary,
-      tarefas: taskReports,
-      geradoEm: new Date().toISOString()
+      exportedAt: new Date().toISOString()
     };
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
+    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    
     const link = document.createElement('a');
     link.href = url;
     link.download = `relatorio-marketing-${format(new Date(), 'dd-MM-yyyy')}.json`;
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  // Método para exportar texto
+  static exportText(
+    data: { summary: ReportSummary; taskReports: TaskReport[]; collaboratorReports: any[] },
+    dateRange: DateRange
+  ): void {
+    let text = 'RELATÓRIO DE TAREFAS - EQUIPE DE MARKETING\n';
+    text += '================================================\n\n';
+    text += `Período: ${format(dateRange.startDate, 'dd/MM/yyyy')} - ${format(dateRange.endDate, 'dd/MM/yyyy')}\n`;
+    text += `Data de geração: ${format(new Date(), 'dd/MM/yyyy HH:mm')}\n\n`;
+    
+    text += 'RESUMO GERAL:\n';
+    text += '--------------\n';
+    text += `Total de Tarefas: ${data.summary.totalTasks}\n`;
+    text += `Tarefas Concluídas: ${data.summary.completedTasks}\n`;
+    text += `Tarefas em Andamento: ${data.summary.inProgressTasks}\n`;
+    text += `Tarefas Atrasadas: ${data.summary.lateTasks}\n`;
+    text += `Tarefas Bloqueadas: ${data.summary.blockedTasks}\n\n`;
+    
+    text += 'RELATÓRIO DETALHADO:\n';
+    text += '--------------------\n\n';
+    
+    data.taskReports.forEach((task, index) => {
+      text += `${index + 1}. ${task.taskName}\n`;
+      text += `   Responsável: ${task.collaboratorName}\n`;
+      text += `   Data prevista: ${task.dueDate}\n`;
+      text += `   Status: ${task.status}\n`;
+      if (task.daysLate > 0) {
+        text += `   Dias em Atraso: ${task.daysLate} dias\n`;
+      }
+      if (task.observations) {
+        text += `   Observações: ${task.observations}\n`;
+      }
+      text += '\n';
+    });
+
+    const dataBlob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(dataBlob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `relatorio-marketing-${format(new Date(), 'dd-MM-yyyy')}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
 }
