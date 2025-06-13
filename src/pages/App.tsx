@@ -107,11 +107,12 @@ function App() {
       setLoading(false);
     }
   };
-  const handleExport = (format: 'json' | 'text') => {
+  const handleExport = (format: 'json' | 'text' | 'compact') => {
     if (!summary || !taskReports.length) return;
-    
     if (format === 'json') {
       ReportExporter.exportJSON({ summary, taskReports, collaboratorReports }, dateRange);
+    } else if (format === 'compact') {
+      ReportExporter.exportTextCompact({ summary, taskReports, collaboratorReports }, dateRange);
     } else {
       ReportExporter.exportText({ summary, taskReports, collaboratorReports }, dateRange);
     }
@@ -355,6 +356,12 @@ function App() {
                     onClick={() => handleExport('text')}
                   >
                     <Download size={16} className="me-1" /> Texto
+                  </button>
+                  <button 
+                    className="btn btn-outline-secondary btn-sm"
+                    onClick={() => handleExport('compact')}
+                  >
+                    <Download size={16} className="me-1" /> Texto Compacto
                   </button>
                   <button 
                     className="btn btn-outline-secondary btn-sm"

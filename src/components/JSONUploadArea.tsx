@@ -24,6 +24,18 @@ const JSONUploadArea: React.FC<{ onUpload: (json: string) => void }> = ({ onUplo
     validateJson(text);
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target?.result as string;
+      setJsonText(text);
+      validateJson(text);
+    };
+    reader.readAsText(file);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (jsonText.trim() && isValidJson) {
@@ -60,11 +72,17 @@ const JSONUploadArea: React.FC<{ onUpload: (json: string) => void }> = ({ onUplo
                 </small>
               )}
             </label>
+            <input
+              type="file"
+              accept="application/json,.json"
+              className="form-control mb-2"
+              onChange={handleFileChange}
+            />
             <textarea
               className={getTextareaClass()}
               value={jsonText}
               onChange={handleTextChange}
-              placeholder="Cole aqui o conteúdo do arquivo JSON exportado do Trello..."
+              placeholder="Cole aqui o conteúdo do arquivo JSON exportado do Trello... ou anexe o arquivo acima."
               rows={8}
               style={{ fontFamily: 'monospace', fontSize: '12px' }}
             />

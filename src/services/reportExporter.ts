@@ -248,4 +248,43 @@ export class ReportExporter {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
+
+  // Exportar para texto compacto e explicativo
+  static exportTextCompact(
+    data: { summary: ReportSummary; taskReports: TaskReport[]; collaboratorReports: any[] },
+    dateRange: DateRange
+  ): void {
+    let text = '📊 RELATÓRIO EXECUTIVO DE MARKETING\n';
+    text += `Período: ${format(dateRange.startDate, 'dd/MM/yyyy')} a ${format(dateRange.endDate, 'dd/MM/yyyy')}\n`;
+    text += `Gerado em: ${format(new Date(), 'dd/MM/yyyy HH:mm')}\n`;
+    text += '\n';
+    text += 'Resumo Rápido:\n';
+    text += `- Total: ${data.summary.totalTasks} tarefas\n`;
+    text += `- ✅ Concluídas: ${data.summary.completedTasks}\n`;
+    text += `- ⏳ Em andamento: ${data.summary.inProgressTasks}\n`;
+    text += `- ⚠️ Atrasadas: ${data.summary.lateTasks}\n`;
+    text += `- 🚫 Bloqueadas: ${data.summary.blockedTasks}\n`;
+    text += '\n';
+    text += 'Principais tarefas:\n';
+    text += '-------------------\n';
+    data.taskReports.slice(0, 15).forEach((task, idx) => {
+      text += `${idx + 1}. ${task.taskName} | ${task.collaboratorName} | ${task.status}`;
+      if (task.daysLate > 0) text += ` | ${task.daysLate}d atraso`;
+      if (task.observations) text += ` | Obs: ${task.observations}`;
+      text += '\n';
+    });
+    if (data.taskReports.length > 15) {
+      text += `...e mais ${data.taskReports.length - 15} tarefas.\n`;
+    }
+    text += '\nLegenda: ✅ Concluída | ⏳ Em andamento | ⚠️ Atrasada | 🚫 Bloqueada\n';
+    const dataBlob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `relatorio-marketing-compacto-${format(new Date(), 'dd-MM-yyyy')}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
 }
